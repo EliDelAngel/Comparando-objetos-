@@ -1,0 +1,214 @@
+public class Main {
+
+    public static void main (String [] args) throws CloneNotSupportedException {
+        Drawable [] shapes = {
+            new Circle (),
+            new Rectangle ()
+        };
+        
+        
+       
+
+        
+        
+         Circle circle1 = new Circle (10, 10, 20);
+        Circle circle2 = new Circle (15, 15, 21);
+        
+        int resultCircles = circle1.compareTo(circle2);
+        System.out.println (resultCircles == 1 ? "Circulo 1 es mayor" : "Circulo 2 es mayor");
+        
+        Rectangle rec1 = new Rectangle (10, 10, 20, 20);
+        Rectangle rec2 = new Rectangle (30, 30, 10, 50);
+        
+        int resultRecs = rec1.compareTo (rec2);
+        System.out.println (resultRecs == 1 ? "Rectángulo 1 es mayor" : "Rectángulo 2 es mayor");
+        
+    }
+    
+}
+
+
+
+public interface Drawable extends ShapeArea {
+    int RED     = 1;
+    int GREEN   = 2;
+    int BLUE    = 3;
+    int BLACK   = 4;
+    int WHITE   = 5;
+    
+    void draw (int color);
+  
+    void fill (int color); 
+   
+}
+
+
+public class Rectangle implements Drawable ,Cloneable,Comparable<Rectangle> {
+
+    private double x1, y1, x2, y2,Area;
+
+    public Rectangle () {}
+    
+    public Rectangle (double x1, double y1, double x2, double y2) {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+    }
+    
+    public double getX1() {
+        return x1;
+    }
+
+    public void setX1(double x1) {
+        this.x1 = x1;
+    }
+
+    public double getY1() {
+        return y1;
+    }
+
+    public void setY1(double y1) {
+        this.y1 = y1;
+    }
+
+    public double getX2() {
+        return x2;
+    }
+
+    public void setX2(double x2) {
+        this.x2 = x2;
+    }
+
+    public double getY2() {
+        return y2;
+    }
+
+    public void setY2(double y2) {
+        this.y2 = y2;
+    }
+
+    public void draw(int color) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void fill(int color) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public double calculateArea() {
+      Area=x1*y1;
+      return Area;
+    }
+
+    @Override
+    public int compareTo(Rectangle o) {
+      int r;
+      double a1,a2;
+        
+        
+        a1=this.calculateArea();
+        a2=o.calculateArea();
+        if(a1>a2)
+        {
+            r=1;
+        }
+        else
+            r=0;
+        return r;
+    }
+
+    
+}
+
+public interface ShapeArea {
+    double calculateArea ();
+}
+
+public class Circle implements Drawable, Cloneable,Comparable<Circle>{
+    
+    private double x, y, radius,Area;
+
+    public Circle () {}
+    
+    public Circle (double x, double y, double radius) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        
+    }
+    
+    public double getX () {
+        return x;
+    }
+
+    public void setX (double x) {
+        this.x = x;
+    }
+
+    public double getY () {
+        return y;
+    }
+
+    public void setY (double y) {
+        this.y = y;
+    }
+
+    public double getRadius () {
+        return radius;
+    }
+
+    public void setRadius (double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public void draw(int color) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void fill(int color) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public double calculateArea() {
+    Area=(radius*3.1416)*(radius*3.1416);
+    return Area;
+    }
+
+    @Override
+      public Object clone() throws CloneNotSupportedException{
+        Object obj=null;
+        try{
+            obj=super.clone();
+        }
+        catch(CloneNotSupportedException ex){
+            System.out.println(" no se puede duplicar");
+        }
+        return obj;
+    }
+
+
+
+    @Override
+    public int compareTo(Circle o) {
+        int r ;
+        double a1,a2;
+        a1=this.calculateArea();
+        a2=o.calculateArea();
+        
+        if(a1>a2)
+        {
+            r=1;
+        }
+      else
+            r=0;
+        return r;
+    }
+
+
+
+}   
+
